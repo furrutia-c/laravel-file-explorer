@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\File;
+use Illuminate\Validation\Rule;
 
 class UploadItemsRequest extends BaseRequest
 {
@@ -77,7 +78,7 @@ class UploadItemsRequest extends BaseRequest
         }
 
         if ($maxFileSize !== null) {
-            $rules['items.*'][] = File::max($maxFileSize);
+            $rules['items.*'][] = 'max:' . $maxFileSize;
         }
 
         return $rules;
